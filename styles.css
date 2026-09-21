@@ -1,0 +1,195 @@
+/* RealSocial brand theme — light-only by decision (see brand sheet).
+   Values read from the app's tokens: maroon band, terracotta accent,
+   warm off-white canvas, Fraunces / Zalando Sans Expanded / Arimo. */
+:root {
+  /* brand core */
+  --maroon: #662126;
+  --band: #3E292E;
+  --terracotta: #C76855;
+  --blush: #F8DAD9;
+
+  /* surfaces */
+  --paper: #F5F4F3;
+  --surface: #FFFFFF;
+  --warm: #FAF9F8;
+  --rule: #E4E4E4;
+  --card-border: #DDDDDD;
+
+  /* text */
+  --ink: #3E292E;
+  --muted: #78696D;
+  --on-maroon: #E3E3E3;
+  --on-maroon-body: #D8D4D5;
+
+  --display: "Fraunces", "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --wordmark: "Zalando Sans Expanded", "Arimo", system-ui, sans-serif;
+  --text: "Arimo", "Helvetica Neue", Arial, sans-serif;
+
+  --shadow-card: 0 4px 8px 2px rgba(137, 137, 137, 0.07);
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 1.5rem; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--text);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--maroon); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--terracotta); outline-offset: 3px; border-radius: 2px; }
+
+/* ---------- Lockup: mark left, wordmark right ---------- */
+.lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+.lockup svg { display: block; flex: none; }
+.wordmark {
+  font-family: var(--wordmark);
+  font-weight: 300;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+}
+.wordmark b { font-weight: 700; }
+
+/* ---------- Footer (shared) ---------- */
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding: 1.5rem clamp(1.25rem, 5vw, 3rem) calc(1.5rem + env(safe-area-inset-bottom, 0px));
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+.site-footer a { color: inherit; }
+.site-footer a:hover { color: var(--ink); }
+
+/* ---------- Landing / 404: the maroon band ---------- */
+.park {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  background: var(--maroon);
+}
+.park .site-header {
+  padding: calc(2rem + env(safe-area-inset-top, 0px)) clamp(1.25rem, 5vw, 3rem) 0;
+  border: 0;
+}
+.park .wordmark {
+  font-size: clamp(1.125rem, 3.4vw, 1.3125rem);
+  color: var(--blush);
+}
+.park main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem clamp(1.25rem, 5vw, 3rem);
+}
+.park h1 {
+  margin: 0;
+  max-width: 14ch;
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(2.75rem, 10vw, 5.5rem);
+  line-height: 1;
+  letter-spacing: -0.005em;
+  color: var(--on-maroon);
+  text-wrap: balance;
+}
+.park h1 em { font-style: italic; display: block; }
+.park .tagline {
+  margin: 1.5rem 0 0;
+  max-width: 38ch;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--on-maroon-body);
+}
+.park .tagline a { color: var(--blush); }
+.park .site-footer { color: rgba(216, 212, 213, 0.75); }
+.park .site-footer a:hover { color: var(--blush); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .park h1 { animation: settle 900ms cubic-bezier(.2,.7,.2,1) both; }
+  .park .lockup circle { animation: bloom 900ms ease-out backwards; }
+  @keyframes settle {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: none; }
+  }
+  @keyframes bloom {
+    from { opacity: 0; transform: scale(0.4); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+}
+
+/* ---------- Document pages ---------- */
+.site-header {
+  padding: calc(1.25rem + env(safe-area-inset-top, 0px)) clamp(1.25rem, 5vw, 3rem) 1.25rem;
+  background: var(--maroon);
+}
+.site-header .wordmark { font-size: 1.125rem; color: var(--blush); }
+
+.doc {
+  max-width: 68ch;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 7vw, 5rem) clamp(1.25rem, 5vw, 2rem) 4rem;
+}
+.doc h1 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(2.25rem, 6vw, 3.25rem);
+  line-height: 1.05;
+  color: var(--band);
+}
+.doc .updated { margin: 1rem 0 2.5rem; color: var(--muted); font-size: 0.875rem; }
+.doc h2 {
+  margin: 3rem 0 0.75rem;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.25;
+  color: var(--band);
+}
+.doc p, .doc ul { margin: 0 0 1rem; }
+.doc p, .doc li { font-size: 0.9375rem; line-height: 1.7; color: var(--muted); }
+.doc ul { padding-left: 1.25rem; }
+.doc li { margin-bottom: 0.4rem; }
+.doc li strong { font-weight: 700; color: var(--band); }
+
+.toc {
+  background: var(--warm);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+  padding: 0.25rem 1.25rem;
+  margin-bottom: 1rem;
+}
+.toc summary {
+  cursor: pointer;
+  padding: 0.85rem 0;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.toc ul {
+  list-style: none;
+  padding: 0 0 1rem;
+  margin: 0;
+  columns: 2 16rem;
+  column-gap: 2rem;
+}
+.toc li { break-inside: avoid; margin-bottom: 0.35rem; font-size: 0.875rem; }
+
+.todo { background: #FFF7EB; color: #FF8D28; padding: 0 0.25em; border-radius: 3px; }
