@@ -161,9 +161,9 @@ a:hover { text-decoration-thickness: 2px; }
   line-height: 1.25;
   color: var(--band);
 }
-.doc p, .doc ul { margin: 0 0 1rem; }
+.doc p, .doc ul, .doc ol { margin: 0 0 1rem; }
 .doc p, .doc li { font-size: 0.9375rem; line-height: 1.7; color: var(--muted); }
-.doc ul { padding-left: 1.25rem; }
+.doc ul, .doc ol { padding-left: 1.25rem; }
 .doc li { margin-bottom: 0.4rem; }
 .doc li strong { font-weight: 700; color: var(--band); }
 
