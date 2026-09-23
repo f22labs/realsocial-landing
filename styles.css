@@ -1,6 +1,7 @@
 /* RealSocial brand theme — light-only by decision (see brand sheet).
    Values read from the app's tokens: maroon band, terracotta accent,
-   warm off-white canvas, Fraunces / Zalando Sans Expanded / Arimo. */
+   warm off-white canvas, Fraunces / Arimo. The wordmark now ships as
+   part of the logo image, so its display face is no longer loaded. */
 :root {
   /* brand core */
   --maroon: #662126;
@@ -22,7 +23,6 @@
   --on-maroon-body: #D8D4D5;
 
   --display: "Fraunces", "Iowan Old Style", Georgia, "Times New Roman", serif;
-  --wordmark: "Zalando Sans Expanded", "Arimo", system-ui, sans-serif;
   --text: "Arimo", "Helvetica Neue", Arial, sans-serif;
 
   --shadow-card: 0 4px 8px 2px rgba(137, 137, 137, 0.07);
@@ -44,7 +44,7 @@ a { color: var(--maroon); text-underline-offset: 0.18em; text-decoration-thickne
 a:hover { text-decoration-thickness: 2px; }
 :focus-visible { outline: 2px solid var(--terracotta); outline-offset: 3px; border-radius: 2px; }
 
-/* ---------- Lockup: mark left, wordmark right ---------- */
+/* ---------- Lockup: the RealSocial logo image ---------- */
 .lockup {
   display: inline-flex;
   align-items: center;
@@ -52,14 +52,13 @@ a:hover { text-decoration-thickness: 2px; }
   text-decoration: none;
   color: var(--blush);
 }
-.lockup svg { display: block; flex: none; }
-.wordmark {
-  font-family: var(--wordmark);
-  font-weight: 300;
-  letter-spacing: 0.4px;
-  white-space: nowrap;
+/* The lockup is a single image (mark + wordmark). Height drives it; width
+   follows the 824x199 intrinsic ratio so the box is reserved before load. */
+.lockup .logo {
+  display: block;
+  width: auto;
+  height: 30px;
 }
-.wordmark b { font-weight: 700; }
 
 /* ---------- Footer (shared) ---------- */
 .site-footer {
@@ -70,6 +69,12 @@ a:hover { text-decoration-thickness: 2px; }
   padding: 1.5rem clamp(1.25rem, 5vw, 3rem) calc(1.5rem + env(safe-area-inset-bottom, 0px));
   font-size: 0.8125rem;
   color: var(--muted);
+}
+/* Copyright left, menu right; the menu wraps as a unit on narrow screens. */
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
 }
 .site-footer a { color: inherit; }
 .site-footer a:hover { color: var(--ink); }
@@ -86,10 +91,7 @@ a:hover { text-decoration-thickness: 2px; }
   padding: calc(2rem + env(safe-area-inset-top, 0px)) clamp(1.25rem, 5vw, 3rem) 0;
   border: 0;
 }
-.park .wordmark {
-  font-size: clamp(1.125rem, 3.4vw, 1.3125rem);
-  color: var(--blush);
-}
+.park .site-header .lockup .logo { height: clamp(28px, 7vw, 34px); }
 .park main {
   display: flex;
   flex-direction: column;
@@ -137,7 +139,7 @@ a:hover { text-decoration-thickness: 2px; }
   padding: calc(1.25rem + env(safe-area-inset-top, 0px)) clamp(1.25rem, 5vw, 3rem) 1.25rem;
   background: var(--maroon);
 }
-.site-header .wordmark { font-size: 1.125rem; color: var(--blush); }
+.site-header .lockup .logo { height: 26px; }
 
 .doc {
   max-width: 68ch;
