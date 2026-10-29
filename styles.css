@@ -198,36 +198,47 @@ a:hover { text-decoration-thickness: 2px; }
 .todo { background: #FFF7EB; color: #FF8D28; padding: 0 0.25em; border-radius: 3px; }
 
 /* ---------- Waitlist form (landing) ----------
-   Sits on the maroon band, so it follows the headline's voice: Fraunces
-   light, no boxes. Fields are underlines, the one filled shape is the CTA. */
-.waitlist { margin-top: 3rem; max-width: 36rem; min-width: 0; }
+   A white card on the maroon band: headline on the left, card on the right
+   from tablet up, stacked below the tagline on phones. Inside the card the
+   fields stay quiet (underlines, Fraunces) and the maroon CTA is the one
+   filled shape. */
+@media (min-width: 56rem) {
+  .park main {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(22rem, 26rem);
+    grid-template-rows: auto auto;
+    align-content: center;
+    column-gap: clamp(3rem, 7vw, 7rem);
+  }
+  .park main h1 { grid-column: 1; align-self: end; }
+  .park main .tagline { grid-column: 1; align-self: start; }
+  .park main .waitlist { grid-column: 2; grid-row: 1 / span 2; align-self: center; margin-top: 0; }
+}
+.waitlist {
+  margin-top: 2.5rem;
+  min-width: 0;
+  max-width: 26rem;
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  background: var(--surface);
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+}
 .waitlist h2 {
-  margin: 0 0 1.75rem;
-  font-family: var(--text);
-  font-weight: 700;
-  font-size: 0.75rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--blush);
-  opacity: 0.85;
+  margin: 0 0 1.5rem;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 1.75rem;
+  line-height: 1.15;
+  color: var(--band);
 }
-.waitlist form {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 1.5rem 2rem;
-}
-.waitlist .field:nth-of-type(3),
-.waitlist button,
-.waitlist .form-status,
-.waitlist .consent { grid-column: 1 / -1; }
+.waitlist form { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
 .waitlist label {
   display: block;
   font-size: 0.6875rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--on-maroon-body);
-  opacity: 0.75;
+  color: var(--muted);
 }
 .waitlist input {
   display: block;
@@ -237,56 +248,52 @@ a:hover { text-decoration-thickness: 2px; }
   font-weight: 300;
   font-size: 1.375rem; /* 16px+ stops iOS zooming on focus */
   line-height: 1.3;
-  color: var(--on-maroon);
-  caret-color: var(--blush);
+  color: var(--ink);
+  caret-color: var(--terracotta);
   background: transparent;
   border: 0;
-  border-bottom: 1px solid rgba(248, 218, 217, 0.4);
+  border-bottom: 1px solid var(--card-border);
   border-radius: 0;
   outline: none;
   transition: border-color 150ms, box-shadow 150ms;
 }
-.waitlist input:hover { border-bottom-color: rgba(248, 218, 217, 0.7); }
+.waitlist input:hover { border-bottom-color: var(--muted); }
 .waitlist input:focus {
-  border-bottom-color: var(--blush);
-  box-shadow: 0 1px 0 0 var(--blush); /* thickens the underline: the focus cue */
+  border-bottom-color: var(--maroon);
+  box-shadow: 0 1px 0 0 var(--maroon); /* thickens the underline: the focus cue */
 }
 .waitlist input[aria-invalid="true"] {
-  border-bottom-color: #FFB4A8;
-  box-shadow: 0 1px 0 0 #FFB4A8;
+  border-bottom-color: #B3261E;
+  box-shadow: 0 1px 0 0 #B3261E;
 }
-/* Keep browser autofill from painting a white/yellow box on the band. */
+/* Keep browser autofill from painting a yellow/blue box over the card. */
 .waitlist input:-webkit-autofill {
-  -webkit-text-fill-color: var(--on-maroon);
-  box-shadow: 0 0 0 1000px var(--maroon) inset;
+  -webkit-text-fill-color: var(--ink);
+  box-shadow: 0 0 0 1000px var(--surface) inset;
   transition: background-color 9999s;
 }
-.waitlist .error {
-  margin: 0.4rem 0 0;
-  font-size: 0.8125rem;
-  line-height: 1.4;
-  color: #FFB4A8;
-}
+.waitlist .error { margin: 0.4rem 0 0; font-size: 0.8125rem; line-height: 1.4; color: #B3261E; }
 .waitlist .error:empty { display: none; }
 .waitlist .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .waitlist button {
-  justify-self: start;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.6rem;
+  width: 100%;
   margin-top: 0.5rem;
-  padding: 0.9rem 1.75rem;
+  padding: 0.95rem 1.75rem;
   font: inherit;
   font-weight: 700;
-  color: var(--maroon);
-  background: var(--blush);
+  color: #fff;
+  background: var(--maroon);
   border: 0;
   border-radius: 999px;
   cursor: pointer;
-  transition: background-color 150ms, transform 150ms;
+  transition: background-color 150ms;
 }
 .waitlist button::after { content: "\2192"; transition: transform 150ms; }
-.waitlist button:hover:not(:disabled) { background: #fff; }
+.waitlist button:hover:not(:disabled) { background: var(--band); }
 .waitlist button:hover:not(:disabled)::after { transform: translateX(3px); }
 .waitlist button:disabled { cursor: not-allowed; opacity: 0.75; }
 .waitlist button.is-loading::after { content: none; }
@@ -294,34 +301,23 @@ a:hover { text-decoration-thickness: 2px; }
   display: none;
   width: 1rem;
   height: 1rem;
-  border: 2px solid rgba(102, 33, 38, 0.3);
-  border-top-color: var(--maroon);
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
   border-radius: 50%;
   animation: spin 700ms linear infinite;
 }
 .waitlist button.is-loading .spinner { display: inline-block; }
 @keyframes spin { to { transform: rotate(360deg); } }
-.waitlist .form-status { margin: 0; font-size: 0.875rem; color: #FFB4A8; }
+.waitlist .form-status { margin: 0; font-size: 0.875rem; color: #B3261E; }
 .waitlist .form-status:empty { display: none; }
-.waitlist .consent {
-  margin: 0;
-  font-size: 0.8125rem;
-  line-height: 1.5;
-  color: var(--on-maroon-body);
-  opacity: 0.8;
-}
-.waitlist .consent a { color: var(--blush); }
+.waitlist .consent { margin: 0; font-size: 0.8125rem; line-height: 1.5; color: var(--muted); }
 .waitlist .success {
   margin: 0;
   font-family: var(--display);
   font-weight: 300;
   font-style: italic;
-  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-size: 1.625rem;
   line-height: 1.3;
-  color: var(--on-maroon);
+  color: var(--band);
 }
 .waitlist [hidden] { display: none; }
-@media (max-width: 34rem) {
-  .waitlist form { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
-  .waitlist button { justify-self: stretch; justify-content: center; }
-}
