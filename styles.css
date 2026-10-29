@@ -84,6 +84,7 @@ a:hover { text-decoration-thickness: 2px; }
   min-height: 100vh;
   min-height: 100dvh;
   display: grid;
+  grid-template-columns: minmax(0, 1fr); /* stop wide children (inputs) from stretching the page past the viewport */
   grid-template-rows: auto 1fr auto;
   background: var(--maroon);
 }
@@ -205,10 +206,13 @@ a:hover { text-decoration-thickness: 2px; }
 @media (min-width: 56rem) {
   .park main {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(22rem, 26rem);
+    grid-template-columns: max-content minmax(22rem, 26rem);
     grid-template-rows: auto auto;
+    justify-content: space-between; /* card pins right, within the capped width */
     align-content: center;
-    column-gap: clamp(3rem, 7vw, 7rem);
+    column-gap: 3rem; /* minimum gap when the screen is tight */
+    /* 74rem up to 1280px wide, then the card drifts right at 60% of the extra width */
+    max-width: max(74rem, calc(74rem + 60vw - 768px));
   }
   .park main h1 { grid-column: 1; align-self: end; }
   .park main .tagline { grid-column: 1; align-self: start; }
@@ -217,6 +221,7 @@ a:hover { text-decoration-thickness: 2px; }
 .waitlist {
   margin-top: 2.5rem;
   min-width: 0;
+  width: 100%;
   max-width: 26rem;
   padding: clamp(1.5rem, 4vw, 2.25rem);
   background: var(--surface);
