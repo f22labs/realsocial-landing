@@ -7,9 +7,26 @@ Static site. No build step. Styled to the RealSocial brand sheet
 - `/`                → index.html (landing page)
 - `/privacy/`        → privacy/index.html
 - `/privacy-policy/` → redirects to `/privacy/`
+- `waitlist.js`      → waitlist form logic (posts to a Google Form)
 - `/terms/`          → terms/index.html
 - `/data-deletion/`  → data-deletion/index.html (Meta's User Data Deletion URL)
 - `404.html`         → not-found page
+
+## Waitlist
+The landing page form (`waitlist.js`) posts to a Google Form's `formResponse`
+URL. That is write-only: the site can submit rows but cannot read anything,
+and no key is in the front end. Responses go to the form's linked Google
+Sheet (Responses tab → Link to Sheets), which stays restricted to the team.
+
+The form must be public: Settings → Responses must NOT be restricted to
+users in the organization, and must not require sign-in or limit to 1 response.
+Field IDs are in `waitlist.js` (`ENTRY`). If you add, delete or recreate a
+question, its `entry.NNN` ID changes: open the form, "Get pre-filled link",
+and copy the new IDs.
+
+Limits to know: Google's reply is opaque to the browser, so a rejected
+submission looks like success (only network errors show the retry message).
+Spam protection is a honeypot field plus a minimum fill time, client-side only.
 
 ## Brand assets
 - `RS-Logo-Pink.png` — the lockup used in the header on every page. Every

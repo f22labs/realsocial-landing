@@ -18,6 +18,34 @@
   <main>
     <h1>Your Socials,<em>AI Managed</em></h1>
     <p class="tagline">Real Social App is coming soon.</p>
+    <section class="waitlist" aria-labelledby="waitlist-title">
+      <h2 id="waitlist-title">Get early access</h2>
+      <form id="waitlist-form" novalidate>
+        <div class="field">
+          <label for="name">Full name</label>
+          <input id="name" name="name" type="text" autocomplete="name" required maxlength="200" aria-describedby="name-error">
+          <p class="error" id="name-error"></p>
+        </div>
+        <div class="field">
+          <label for="city">City</label>
+          <input id="city" name="city" type="text" autocomplete="address-level2" required maxlength="200" aria-describedby="city-error">
+          <p class="error" id="city-error"></p>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="200" aria-describedby="email-error">
+          <p class="error" id="email-error"></p>
+        </div>
+        <div class="hp" aria-hidden="true">
+          <label for="website">Website</label>
+          <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <button type="submit"><span class="label">Join the Waitlist</span><span class="spinner" aria-hidden="true"></span></button>
+        <p class="form-status" id="waitlist-status" role="alert"></p>
+        <p class="consent">By joining, you agree to receive updates about RealSocial. <a href="privacy/">Privacy Policy</a></p>
+      </form>
+      <p class="success" id="waitlist-success" role="status" tabindex="-1" hidden>You’re on the list. We’ll be in touch soon.</p>
+    </section>
   </main>
   <footer class="site-footer">
     <span>&copy; 2026 Real Social Ventures, LLC</span>
@@ -27,5 +55,6 @@
       <a href="data-deletion/">Delete your data</a>
     </nav>
   </footer>
+  <script src="waitlist.js" defer></script>
 </body>
 </html>

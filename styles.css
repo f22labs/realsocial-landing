@@ -196,3 +196,132 @@ a:hover { text-decoration-thickness: 2px; }
 .toc li { break-inside: avoid; margin-bottom: 0.35rem; font-size: 0.875rem; }
 
 .todo { background: #FFF7EB; color: #FF8D28; padding: 0 0.25em; border-radius: 3px; }
+
+/* ---------- Waitlist form (landing) ----------
+   Sits on the maroon band, so it follows the headline's voice: Fraunces
+   light, no boxes. Fields are underlines, the one filled shape is the CTA. */
+.waitlist { margin-top: 3rem; max-width: 36rem; min-width: 0; }
+.waitlist h2 {
+  margin: 0 0 1.75rem;
+  font-family: var(--text);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blush);
+  opacity: 0.85;
+}
+.waitlist form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.5rem 2rem;
+}
+.waitlist .field:nth-of-type(3),
+.waitlist button,
+.waitlist .form-status,
+.waitlist .consent { grid-column: 1 / -1; }
+.waitlist label {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--on-maroon-body);
+  opacity: 0.75;
+}
+.waitlist input {
+  display: block;
+  width: 100%;
+  padding: 0.4rem 0 0.6rem;
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: 1.375rem; /* 16px+ stops iOS zooming on focus */
+  line-height: 1.3;
+  color: var(--on-maroon);
+  caret-color: var(--blush);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(248, 218, 217, 0.4);
+  border-radius: 0;
+  outline: none;
+  transition: border-color 150ms, box-shadow 150ms;
+}
+.waitlist input:hover { border-bottom-color: rgba(248, 218, 217, 0.7); }
+.waitlist input:focus {
+  border-bottom-color: var(--blush);
+  box-shadow: 0 1px 0 0 var(--blush); /* thickens the underline: the focus cue */
+}
+.waitlist input[aria-invalid="true"] {
+  border-bottom-color: #FFB4A8;
+  box-shadow: 0 1px 0 0 #FFB4A8;
+}
+/* Keep browser autofill from painting a white/yellow box on the band. */
+.waitlist input:-webkit-autofill {
+  -webkit-text-fill-color: var(--on-maroon);
+  box-shadow: 0 0 0 1000px var(--maroon) inset;
+  transition: background-color 9999s;
+}
+.waitlist .error {
+  margin: 0.4rem 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: #FFB4A8;
+}
+.waitlist .error:empty { display: none; }
+.waitlist .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.waitlist button {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+  padding: 0.9rem 1.75rem;
+  font: inherit;
+  font-weight: 700;
+  color: var(--maroon);
+  background: var(--blush);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 150ms, transform 150ms;
+}
+.waitlist button::after { content: "\2192"; transition: transform 150ms; }
+.waitlist button:hover:not(:disabled) { background: #fff; }
+.waitlist button:hover:not(:disabled)::after { transform: translateX(3px); }
+.waitlist button:disabled { cursor: not-allowed; opacity: 0.75; }
+.waitlist button.is-loading::after { content: none; }
+.waitlist button .spinner {
+  display: none;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(102, 33, 38, 0.3);
+  border-top-color: var(--maroon);
+  border-radius: 50%;
+  animation: spin 700ms linear infinite;
+}
+.waitlist button.is-loading .spinner { display: inline-block; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.waitlist .form-status { margin: 0; font-size: 0.875rem; color: #FFB4A8; }
+.waitlist .form-status:empty { display: none; }
+.waitlist .consent {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--on-maroon-body);
+  opacity: 0.8;
+}
+.waitlist .consent a { color: var(--blush); }
+.waitlist .success {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  line-height: 1.3;
+  color: var(--on-maroon);
+}
+.waitlist [hidden] { display: none; }
+@media (max-width: 34rem) {
+  .waitlist form { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
+  .waitlist button { justify-self: stretch; justify-content: center; }
+}
