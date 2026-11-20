@@ -10,6 +10,7 @@ Static site. No build step. Styled to the RealSocial brand sheet
 - `waitlist.js`      → waitlist form logic (posts to a Google Form)
 - `/terms/`          → terms/index.html
 - `/data-deletion/`  → data-deletion/index.html (Meta's User Data Deletion URL)
+- `/support/`        → support/index.html
 - `404.html`         → not-found page
 
 ## Waitlist
